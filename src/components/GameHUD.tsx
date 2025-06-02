@@ -2,14 +2,6 @@ import React from 'react';
 import { useGame } from '../context/GameContext';
 import { Heart } from 'lucide-react';
 
-const ENEMIES_PER_LEVEL = {
-  1: 1,
-  2: 1,
-  3: 1,
-  4: 1,
-  5: 1
-};
-
 const GameHUD: React.FC = () => {
   const { score, level, lives, isBossFight, bossHealth, enemiesKilled } = useGame();
   
@@ -18,8 +10,8 @@ const GameHUD: React.FC = () => {
   if (isBossFight) {
     progress = 100;
   } else {
-    const total = ENEMIES_PER_LEVEL[level as keyof typeof ENEMIES_PER_LEVEL] || 1;
-    progress = Math.min(100, Math.round((enemiesKilled / total) * 100));
+    const total = 10;
+    progress = Math.min(100, Math.round(enemiesKilled * 100 / total));
   }
 
   return (
@@ -42,7 +34,7 @@ const GameHUD: React.FC = () => {
           {isBossFight ? (
             <div 
               className="h-full bg-red-500 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${bossHealth}%` }}
+              style={{ width: `${bossHealth * 20}%` }}
             />
           ) : (
             <div 
