@@ -65,23 +65,6 @@ const GameContext = createContext<GameContextType>(initialContext);
 
 export const useGame = () => useContext(GameContext);
 
-//for testing set these value as 1
-// const ENEMIES_PER_LEVEL = {
-//   1: 1,
-//   2: 1,
-//   3: 1,
-//   4: 1,
-//   5: 1
-// };
-
-const ENEMIES_PER_LEVEL = {
-  1: 5,
-  2: 7,
-  3: 10,
-  4: 12,
-  5: 14
-};
-
 const BOSS_MAX_HEALTH = 5; // Boss requires 5 hits to defeat, set to 1 for testing
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -199,7 +182,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return prev.filter(p => p.x >= 15);
       });
 
-      if (!isBossFight && enemiesKilled >= ENEMIES_PER_LEVEL[level as keyof typeof ENEMIES_PER_LEVEL]) {
+      if (!isBossFight && enemiesKilled >= 10) {
         spawnBoss();
         setIsBossFight(true);
         setBossHealth(BOSS_MAX_HEALTH);
